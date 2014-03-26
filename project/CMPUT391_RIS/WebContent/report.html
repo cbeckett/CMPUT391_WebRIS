@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<TITLE>Radiology Information System</TITLE>
+</HEAD>
+
+<BODY>
+<!--This is the login page-->
+<H1><CENTER>Reporting</CENTER></H1>
+
+<FORM NAME="ReportForm" ACTION="report.jsp" METHOD="post" >
+
+<P>Please enter the search criteria</P>
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Diagnosis:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="DIAGNOSIS" VALUE="diagnosis"><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Start Date (dd/mm/yyyy):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="START_DATE" VALUE="01/01/0001"></TD>
+<TD><B><I>End Date (dd/mm/yyyy):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="END_DATE" VALUE="01/01/0001"></TD>
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" NAME="Search" VALUE="SEARCH">
+</FORM>
