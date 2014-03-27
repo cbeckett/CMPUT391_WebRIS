@@ -1,90 +1,88 @@
 
 <HTML>
+
 <HEAD>
-
-
-<TITLE>Your Login Result</TITLE>
+<TITLE>Login</TITLE>
 </HEAD>
 
 <BODY>
-<!--A simple example to demonstrate how to use JSP to 
-    connect and query a database. 
-    @author  Hong-Yu Zhang, University of Alberta
- -->
-<%@ page import="java.sql.*" %>
-<% 
 
-        if(request.getParameter("bSubmit") != null)
-        {
+	<%@ page
+		import="java.sql.*,
+                java.io.InputStream, 
+                java.io.IOException,
+                java.util.Properties,
+                org.ris.Database"%>
+	<%
+		if (request.getParameter("bSubmit") != null) {
 
-	        //get the user input from the login page
-        	String userName = (request.getParameter("USERID")).trim();
-	        String passwd = (request.getParameter("PASSWD")).trim();
-        	out.println("<p>Your input User Name is "+userName+"</p>");
-        	out.println("<p>Your input password is "+passwd+"</p>");
+			//Get the user input from the login page
+			String userName = (request.getParameter("USERID")).trim();
+			String passwd = (request.getParameter("PASSWD")).trim();
 
+			//Establish the connection to db
+			Connection databaseConnection = Database.requestConnection();
 
-	        //establish the connection to the underlying database
-        	Connection databaseConnection = null;
-        	String dbstring = "jdbc:mariadb://" + 
-        	"localhost:3307" + "/" + 
-        			"ris";
-        	String username = "root";
-        	String pwd = "12345";
-        	try {
-    			databaseConnection = DriverManager.getConnection(dbstring, username, pwd);
-    		} catch (SQLException e) {
-    			 out.println("<hr>" + e.getMessage() + "<hr>");
-    		}
-	
+			if (databaseConnection != null) {
+				//Query for user info
+				Statement stmt = null;
+				ResultSet rset = null;
+				String sql = "SELECT password, class FROM users WHERE user_name = '"
+						+ userName + "'";
+				try {
+					stmt = databaseConnection.createStatement();
+					rset = stmt.executeQuery(sql);
+				} catch (Exception ex) {
+					out.println("<p>" + ex.getMessage() + "<p>");
+				}
 
-	        //select the user table from the underlying db and validate the user name and password
-        	Statement stmt = null;
-	        ResultSet rset = null;
-        	String sql = "select PWD from login where id = '"+userName+"'";
-	        out.println(sql);
-        	try{
-	        	stmt = databaseConnection.createStatement();
-		        rset = stmt.executeQuery(sql);
-        	}
-	
-	        catch(Exception ex){
-		        out.println("<hr>" + ex.getMessage() + "<hr>");
-        	}
+				//Process results
+				String truepwd = "";
+				String userClass = "";
+				while (rset != null && rset.next())
+				{
+					truepwd = (rset.getString("password")).trim();
+					userClass = (rset.getString("class")).trim();
+				}
+				
+				//Display the result
+				if (!passwd.isEmpty() && passwd.equals(truepwd)) {
+					//Store cookie on user's machine
+					Cookie cookie = new Cookie("class", userClass);
+					response.addCookie(cookie);
+					//Redirect to welcome
+					out.println("<p><b>Success!</b></p>");
+					
 
-	        String truepwd = "";
-	
-        	while(rset != null && rset.next())
-	        	truepwd = (rset.getString(1)).trim();
-	
-        	//display the result
-	        if(passwd.equals(truepwd)) {
-		        out.println("<p><b>Your Login is Successful!</b></p>");
-		        //Store cookie on user's machine
-		        Cookie cookie = new Cookie("username", userName);
-		        response.addCookie(cookie);
-		        
-	        }
-        	else
-	        	out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
+				} else {
+					out.println("<p><b>Username or password is invalid!</b></p>");
+					displayLoginForm(out);
+				}
+				try {
+					databaseConnection.close();
+				} catch (Exception ex) {
+					out.println("<hr>" + ex.getMessage() + "<hr>");
+				}
+			}
+		} else {
+			displayLoginForm(out);
+		}
+	%>
 
-                try{
-                	databaseConnection.close();
-                }
-                catch(Exception ex){
-                        out.println("<hr>" + ex.getMessage() + "<hr>");
-                }
-        }
-        else
-        {
-                out.println("<form method=post action=login.jsp>");
-                out.println("UserName: <input type=text name=USERID maxlength=20><br>");
-                out.println("Password: <input type=password name=PASSWD maxlength=20><br>");
-                out.println("<input type=submit name=bSubmit value=Submit>");
-                out.println("</form>");
-        }      
+<%!
+public void displayLoginForm(JspWriter out)
+{
+	try {
+	    out.println("<form method=post action=login.jsp>");
+	    out.println("UserName: <input type=text name=USERID maxlength=24><br>");
+	    out.println("Password: <input type=password name=PASSWD maxlength=24><br>");
+	    out.println("<input type=submit name=bSubmit value=Submit>");
+	    out.println("</form>");;
+    } catch (IOException ex) {
+        //TODO Log error
+    }
+}
 %>
-
 
 
 </BODY>

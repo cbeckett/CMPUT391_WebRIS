@@ -5,6 +5,10 @@
  *  Author:     Prof. Li-Yan Yuan
  */
  
+DROP DATABASE IF EXISTS ris;
+CREATE DATABASE ris;
+USE ris;
+ /*
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS family_doctor;
 DROP TABLE IF EXISTS pacs_images;
@@ -12,6 +16,7 @@ DROP TABLE IF EXISTS radiology_record;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS persons;
 SET FOREIGN_KEY_CHECKS = 1;
+*/
 
 /*
  *  To store the personal information

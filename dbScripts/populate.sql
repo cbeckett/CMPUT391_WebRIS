@@ -1,3 +1,5 @@
+USE ris;
+
 INSERT INTO persons
 VALUES
   ('11111', 'Allen', 'Ackintosh', '692 Promiscuous Plaza', 'ItsATrap@starwars.org','3265553492'),
@@ -5,7 +7,8 @@ VALUES
   ('33333', 'Charles', 'Cox', '1240 Ambient Avenue', 'onceUponATime@fantasy.ca', '3265558456'),
   ('44444', 'Darwin', 'Demosiac', '281 Bumblepuppy Boulevard', 'leeeeeeeeeeroy@jen.kins', '3285552349'),
   ('55555', 'Eleanor', 'Eberly', '1023 Bokanovsky Lane', 'knockKnock@whos.there', '3265556329'),
-  ('66666', 'Fred', 'Frugal', '944 Soma Court', 'fake@fake.fake', '3295552478');
+  ('66666', 'Fred', 'Frugal', '944 Soma Court', 'fake@fake.fake', '3295552478'),
+  ('77777', 'test', 'test', '944 Soma Court', 'test@test.test', '3295552478');
   
 INSERT INTO users
 VALUES
@@ -14,7 +17,8 @@ VALUES
   ('user3', 'fffffff', 'p', '33333', "2003-03-03"),
   ('user4', 'dddddddd', 'd', '44444', "2004-04-04"),
   ('user5', 'sssssss', 'd', '55555', "2005-05-05"),
-  ('user6', 'aaaaaaaa', 'r', '66666', "2006-06-06");
+  ('user6', 'aaaaaaaa', 'r', '66666', "2006-06-06"),
+  ('a', 'a', 'a', '77777', "2006-06-06");
   
 INSERT INTO family_doctor
 VALUES
