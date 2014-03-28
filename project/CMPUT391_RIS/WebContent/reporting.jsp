@@ -6,7 +6,7 @@
 </HEAD>
 
 <BODY>
-
+    <%@ include file="navigation.html" %>
 	<%@ page
 		import="java.sql.*,
                 java.io.InputStream, 
@@ -31,11 +31,17 @@
 			String startDate = (request.getParameter("STARTDATE")).trim();
 			String endDate = (request.getParameter("ENDDATE")).trim();
 
+			//Set dates to default values if they were left empty
+			if(startDate.isEmpty())
+				startDate = "0001-01-01";
+			if(endDate.isEmpty())
+				endDate = "9999-12-31";
+			
 			//Establish the connection to db
 			Connection databaseConnection = Database.requestConnection();
 
 			if (databaseConnection != null) {
-				//Query for user info
+				//Query for report data
 				Statement stmt = null;
 				ResultSet rset = null;
 				String sql = "SELECT first_name, last_name, address, phone, test_date " +  
@@ -52,7 +58,7 @@
 				} catch (Exception ex) {
 					out.println("<p>" + ex.getMessage() + "<p>");
 				}
-				
+
 				//Display results
                out.println("<table border=\"1\" style=\"width:600px\">");
                out.println("<tr>");
@@ -86,8 +92,8 @@
 		try {
 			out.println("<form method=post action=reporting.jsp>");
 			out.println("Diagnosis: <input type=text name=DIAGNOSIS maxlength=128><br>");
-			out.println("Start Date (yyyy-mm-dd): <input type=date name=STARTDATE><br>");
-			out.println("End Date (yyyy-mm-dd): <input type=date name=ENDDATE><br>");
+			out.println("Start Date: <input type=date name=STARTDATE><br>");
+			out.println("End Date: <input type=date name=ENDDATE><br>");
 			out.println("<input type=submit name=bSubmit value=Submit>");
 			out.println("</form>");
 			;

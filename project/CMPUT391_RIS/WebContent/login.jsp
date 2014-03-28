@@ -52,11 +52,11 @@
 					response.addCookie(cookie);
 					//Redirect to welcome
 					out.println("<p><b>Success!</b></p>");
-					
+					response.sendRedirect("reporting.jsp");
 
 				} else {
-					out.println("<p><b>Username or password is invalid!</b></p>");
 					displayLoginForm(out);
+	                out.println("<p><b>Username or password is invalid!</b></p>");
 				}
 				try {
 					databaseConnection.close();
@@ -73,6 +73,7 @@
 public void displayLoginForm(JspWriter out)
 {
 	try {
+		out.println("<h2>Please Log-In</h2>");
 	    out.println("<form method=post action=login.jsp>");
 	    out.println("UserName: <input type=text name=USERID maxlength=24><br>");
 	    out.println("Password: <input type=password name=PASSWD maxlength=24><br>");
