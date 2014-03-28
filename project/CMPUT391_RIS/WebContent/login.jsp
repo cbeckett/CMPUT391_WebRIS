@@ -2,7 +2,7 @@
 <HTML>
 
 <HEAD>
-<TITLE>Login</TITLE>
+<TITLE>RIS - Login</TITLE>
 </HEAD>
 
 <BODY>
