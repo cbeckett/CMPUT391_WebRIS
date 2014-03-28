@@ -29,7 +29,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
-*.class
+#*.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

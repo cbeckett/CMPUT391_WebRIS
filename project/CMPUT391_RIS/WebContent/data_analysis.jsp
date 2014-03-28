@@ -20,10 +20,14 @@
 
             //Get user permissions and validate
             Cookie[] cookies = request.getCookies();
-            if(cookies != null)
-            {
-                
-            }
+            int cookieIndex = 0;
+            //Re-direct early if no cookie exists
+            if(cookies == null)
+            	response.sendRedirect("login.jsp");
+            //Get the user class cookie, check permissions
+            while((cookies[cookieIndex++].getName() != "class") && cookieIndex < cookies.length);
+            if((cookieIndex >= cookies.length) || !cookies[cookieIndex].getValue().equalsIgnoreCase("a"))
+            	response.sendRedirect("login.jsp"); //Insufficient privilge, re-direct
             
             //Get the user input from the report form
             String firstName = (request.getParameter("FIRSTNAME")).trim();
