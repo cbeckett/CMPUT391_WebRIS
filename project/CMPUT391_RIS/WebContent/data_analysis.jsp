@@ -84,16 +84,28 @@
                out.println("<table border=\"1\" style=\"width:600px\">");
                out.println("<tr>");
                out.println("<th>Image Count</th>");
-               out.println("<th>Year</th>");
-               out.println("<th>Month</th>");
-               out.println("<th>Week</th>");
+               if(!time.equalsIgnoreCase("ALL"))
+            	    out.println("<th>Year</th>");
+               if(time.equalsIgnoreCase("MONTH"))
+            	    out.println("<th>Month</th>");
+               if(time.equalsIgnoreCase("WEEK"))
+               {
+            	   out.println("<th>Month</th>");
+            	   out.println("<th>Week</th>");
+               }
                out.println("</tr>");
                 while (rset != null && rset.next()) {
                        out.println("<tr>");
                        out.println("<td>" + rset.getString("count") + "</td>");
-                       out.println("<td>" + rset.getString("year") + "</td>");
-                       out.println("<td>" + rset.getString("month") + "</td>");
-                       out.println("<td>" + rset.getString("week") + "</td>");
+                       if(!time.equalsIgnoreCase("ALL"))
+                           out.println("<td>" + rset.getString("year") + "</td>");
+	                   if(time.equalsIgnoreCase("MONTH"))
+	                	   out.println("<td>" + rset.getString("month") + "</td>");
+	                   if(time.equalsIgnoreCase("WEEK"))
+	                   {
+	                	   out.println("<td>" + rset.getString("month") + "</td>");
+	                       out.println("<td>" + rset.getString("week") + "</td>");
+	                   }
                        out.println("</tr>");
                 }
                 out.println("</table>");
