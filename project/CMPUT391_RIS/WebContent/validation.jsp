@@ -16,7 +16,7 @@
 	<%
 	try {
 		String userClass = request.getParameter("userClass");
-		request.setAttribute("validated", null);
+		request.setAttribute("validated", "FALSE");
 	    //Get user permissions and validate
 	    Cookie[] cookies = request.getCookies();
 	    Cookie classCookie = null;

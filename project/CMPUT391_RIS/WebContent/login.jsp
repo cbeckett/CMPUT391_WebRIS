@@ -52,7 +52,7 @@
 					response.addCookie(cookie);
 					//Redirect to welcome
 					out.println("<p><b>Success!</b></p>");
-					response.sendRedirect("reporting.jsp");
+					response.sendRedirect("help.jsp");
 
 				} else {
 					displayLoginForm(out);
@@ -75,10 +75,10 @@ public void displayLoginForm(JspWriter out)
 	try {
 		out.println("<h2>Please Log-In</h2>");
 	    out.println("<form method=post action=login.jsp>");
-	    out.println("UserName: <input type=text name=USERID maxlength=24><br>");
+	    out.println("Username: <input type=text name=USERID maxlength=24><br>");
 	    out.println("Password: <input type=password name=PASSWD maxlength=24><br>");
 	    out.println("<input type=submit name=bSubmit value=Submit>");
-	    out.println("</form>");;
+	    out.println("</form>");
     } catch (IOException ex) {
         //TODO Log error
     }

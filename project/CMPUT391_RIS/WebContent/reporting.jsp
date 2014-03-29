@@ -13,13 +13,17 @@
                 java.io.IOException,
                 java.util.Properties,
                 org.ris.Database"%>
+    <jsp:include page="validation.jsp" >
+        <jsp:param name="userClass" value="a"/>
+    </jsp:include>
 	<%
+	    //Check validation
+		String validated = (String) request.getAttribute("validated");
+		if(validated.equalsIgnoreCase("FALSE"))
+			response.sendRedirect("access_denied.jsp");
+	
 		displayReportForm(out, request);
 		if (request.getParameter("bSubmit") != null) {
-
-
-			
-			
 			//Get the user input from the report form
 			String diagnosis = (request.getParameter("DIAGNOSIS")).trim();
 			String startDate = (request.getParameter("STARTDATE")).trim();
