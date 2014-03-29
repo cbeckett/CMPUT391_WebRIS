@@ -31,6 +31,18 @@ VALUES
 	('1', '22222', '44444', '66666', 'fakeTest1', "2002-04-04", "2002-05-06", "diagnosis11111aaaaaaaaaaaaaaaa", "description11111ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
 	('2', '22222', '44444', '66666', 'fakeTest1', "2002-06-04", "2002-07-06", "diagnosis22222aaaaaaaaaaaaaaaa", "description22222ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
 	('3', '22222', '44444', '66666', 'fakeTest1', "2002-08-04", "2002-09-06", "diagnosis33333aaaaaaaaaaaaaaaa", "description33333ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
-	('4', '33333', '44444', '66666', 'fakeTest1', "2003-04-04", "2002-05-06", "diagnosis44444aaaaaaaaaaaaaaaa", "description44444ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
+	('4', '33333', '44444', '66666', 'fakeTest1', "2003-04-04", "2003-05-06", "diagnosis44444aaaaaaaaaaaaaaaa", "description44444ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
 	('5', '33333', '55555', '66666', 'fakeTest1', "2003-05-04", "2002-06-06", "diagnosis55555aaaaaaaaaaaaaaaa", "description55555ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
-	('6', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+	('6', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
+	('7', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
+	('8', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+			
+	
+INSERT INTO pacs_images
+VALUES
+	('1', '1', NULL, NULL, NULL),
+	('1', '2', NULL, NULL, NULL),
+	('2', '3', NULL, NULL, NULL),
+	('3', '4', NULL, NULL, NULL),
+	('4', '5', NULL, NULL, NULL),
+	('4', '6', NULL, NULL, NULL);

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>RIS - Help</title>
 </head>
 <body>
-
+<%@ include file="navigation.html" %>
 </body>
 </html>

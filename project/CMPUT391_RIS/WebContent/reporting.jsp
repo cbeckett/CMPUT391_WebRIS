@@ -15,15 +15,9 @@
                 org.ris.Database"%>
 	<%
 		displayReportForm(out);
-	
 		if (request.getParameter("bSubmit") != null) {
 
-			//Get user permissions and validate
-			Cookie[] cookies = request.getCookies();
-			if(cookies != null)
-			{
-				
-			}
+
 			
 			
 			//Get the user input from the report form
@@ -44,14 +38,13 @@
 				//Query for report data
 				Statement stmt = null;
 				ResultSet rset = null;
-				String sql = "SELECT first_name, last_name, address, phone, test_date " +  
+				String sql = "SELECT first_name, last_name, address, phone, test_date, diagnosis " +  
 						"FROM persons, users, radiology_record " +  
 						"WHERE users.class = 'p' AND " +  
 						"persons.person_id = users.person_id AND " +  
 						"radiology_record.patient_id = persons.person_id AND " + 
 						"radiology_record.diagnosis LIKE \"%" + diagnosis + "%\" AND " + 
-						"radiology_record.test_date > \"" + startDate + "\" AND " + 
-						"radiology_record.test_date < \"" + endDate + "\";";
+						"radiology_record.test_date BETWEEN \"" + startDate + "\" AND \"" + endDate + "\";";
 				try {
 					stmt = databaseConnection.createStatement();
 					rset = stmt.executeQuery(sql);
@@ -60,13 +53,14 @@
 				}
 
 				//Display results
-               out.println("<table border=\"1\" style=\"width:600px\">");
+               out.println("<table border=\"1\" style=\"width:1000px\">");
                out.println("<tr>");
                out.println("<th>First Name</th>");
                out.println("<th>Last Name</th>");
                out.println("<th>Address</th>");
                out.println("<th>Phone</th>");
                out.println("<th>Test Date</th>");
+               out.println("<th>Diagnosis</th>");
                out.println("</tr>");
 				while (rset != null && rset.next()) {
 		               out.println("<tr>");
@@ -75,6 +69,7 @@
 		               out.println("<td>" + rset.getString("address") + "</td>");
 		               out.println("<td>" + rset.getString("phone") + "</td>");
 		               out.println("<td>" + rset.getString("test_date") + "</td>");
+		               out.println("<td>" + rset.getString("diagnosis") + "</td>");
 		               out.println("</tr>");
 				}
 				out.println("</table>");
@@ -101,6 +96,7 @@
 			//TODO Log error
 		}
 	}%>
+	
 
 
 </BODY>
