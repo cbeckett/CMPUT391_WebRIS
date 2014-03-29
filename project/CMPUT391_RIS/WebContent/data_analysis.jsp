@@ -69,9 +69,9 @@
                 		sql += ", MONTH(radiology_record.test_date) ";
                 	if(time.equalsIgnoreCase("MONTH"))
                         sql += ", MONTH(radiology_record.test_date),  WEEKOFYEAR(radiology_record.test_date)";
-                	
+                    sql += " ORDER BY radiology_record.test_date;"; 
                 }
-                sql += " ORDER BY radiology_record.test_date;"; 
+
 
                 try {
                     stmt = databaseConnection.createStatement();
