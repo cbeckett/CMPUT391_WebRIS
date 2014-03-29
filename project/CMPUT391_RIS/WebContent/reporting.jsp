@@ -14,7 +14,7 @@
                 java.util.Properties,
                 org.ris.Database"%>
 	<%
-		displayReportForm(out);
+		displayReportForm(out, request);
 		if (request.getParameter("bSubmit") != null) {
 
 
@@ -83,12 +83,23 @@
 		}
 	%>
 
-	<%!public void displayReportForm(JspWriter out) {
+	<%!public void displayReportForm(JspWriter out, HttpServletRequest request) {
 		try {
+			//Get past form data (if exists)
+			String diagnosis = (request.getParameter("DIAGNOSIS"));
+            String startDate = (request.getParameter("STARTDATE"));
+            String endDate = (request.getParameter("ENDDATE"));
+            if(diagnosis == null)
+            	diagnosis = "";
+            if(startDate == null)
+            	startDate = "";
+            if(endDate == null)
+            	endDate = "";
+			
 			out.println("<form method=post action=reporting.jsp>");
-			out.println("Diagnosis: <input type=text name=DIAGNOSIS maxlength=128><br>");
-			out.println("Start Date: <input type=date name=STARTDATE><br>");
-			out.println("End Date: <input type=date name=ENDDATE><br>");
+			out.print("Diagnosis: <input type=text name=DIAGNOSIS maxlength=128 value="+ diagnosis + "><br>");
+			out.println("Start Date: <input type=date name=STARTDATE value="+ startDate + "><br>");
+			out.println("End Date: <input type=date name=ENDDATE value="+ endDate + "><br>");
 			out.println("<input type=submit name=bSubmit value=Submit>");
 			out.println("</form>");
 			;

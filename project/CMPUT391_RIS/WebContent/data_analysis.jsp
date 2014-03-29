@@ -21,7 +21,7 @@
                 
     <%
         
-        displayAnalysisForm(out);
+        displayAnalysisForm(out, request);
     
         if (request.getParameter("bSubmit") != null) {
             //Get the user input from the report form
@@ -119,15 +119,32 @@
         }
     %>
 
-    <%!public void displayAnalysisForm(JspWriter out) {
+    <%!public void displayAnalysisForm(JspWriter out, HttpServletRequest request) {
         try {
+        	//Retrieve past form data (if exists)
+            String firstName = (request.getParameter("FIRSTNAME"));
+            String lastName = (request.getParameter("LASTNAME"));
+            String testType = (request.getParameter("TESTTYPE"));
+            String testYear = (request.getParameter("TESTYEAR"));
+            String testMonth = (request.getParameter("TESTMONTH"));
+            if(firstName == null)
+            	firstName = "";
+            if(lastName == null)
+            	lastName = "";
+            if(testType == null)
+            	testType = "";
+            if(testYear == null)
+            	testYear = "";
+            if(testMonth == null)
+            	testMonth = "";
+            
+            
             out.println("<form method=post action=data_analysis.jsp>");
-            out.println("Patient First Name: <input type=text name=FIRSTNAME maxlength=128><br>");
-            out.println("Patient Last Name: <input type=text name=LASTNAME maxlength=128><br>");
-            out.println("Test Type: <input type=text name=TESTTYPE maxlength=128><br>");
-            out.println("Test Year: <input type=number name=TESTYEAR maxlength=128><br>");
-            out.println("Test Month: <input type=number name=TESTMONTH maxlength=128><br>");
-            out.println("Test Type: <input type=number name= maxlength=128><br>");
+            out.println("Patient First Name: <input type=text name=FIRSTNAME maxlength=128 value=" + firstName + "><br>");
+            out.println("Patient Last Name: <input type=text name=LASTNAME maxlength=128 value=" + lastName + "><br>");
+            out.println("Test Type: <input type=text name=TESTTYPE maxlength=128 value=" + testType + "><br>");
+            out.println("Test Year: <input type=number name=TESTYEAR maxlength=128 value=" + testYear + "><br>");
+            out.println("Test Month: <input type=number name=TESTMONTH maxlength=128 value=" + testMonth + "><br>");
             out.println("Time:");
             out.println("All <input type=radio name=\"TIME\"checked value=ALL>");
             out.println("Year <input type=radio name=\"TIME\" value=YEAR>");
