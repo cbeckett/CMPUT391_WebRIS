@@ -62,7 +62,7 @@
                 		"persons.last_name LIKE \"%" + lastName + "%\" AND " +
                 		"radiology_record.test_type LIKE \"%" + testType + "%\" AND " +
                 		"radiology_record.test_date LIKE \"" + testYear + "-" + testMonth + "-%\" "; 
-                if(!time.isEmpty())
+                if(!time.isEmpty() && !time.equalsIgnoreCase("ALL"))
                 {
                 	sql = sql + "GROUP BY YEAR(radiology_record.test_date)";
                 	if(time.equalsIgnoreCase("MONTH"))
@@ -117,7 +117,8 @@
             out.println("Test Month: <input type=number name=TESTMONTH maxlength=128><br>");
             out.println("Test Type: <input type=number name= maxlength=128><br>");
             out.println("Time:");
-            out.println("Year <input type=radio name=\"TIME\"checked value=YEAR>");
+            out.println("All <input type=radio name=\"TIME\"checked value=ALL>");
+            out.println("Year <input type=radio name=\"TIME\" value=YEAR>");
             out.println("Month <input type=radio name=\"TIME\" value=MONTH>");
             out.println("Week <input type=radio name=\"TIME\" value=WEEK><br>");
             out.println("<input type=submit name=bSubmit value=Submit>");
