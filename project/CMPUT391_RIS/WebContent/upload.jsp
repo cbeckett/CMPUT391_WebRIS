@@ -1,4 +1,3 @@
-
 <HTML>
 
 <HEAD>
@@ -6,38 +5,23 @@
 </HEAD>
 
 <BODY>
-
-    <%@ include file="navigation.html" %>
-    <%@ page
-        import="java.sql.*,
-                java.io.InputStream, 
-                java.io.IOException,
-                java.util.Properties,
-                org.ris.Database"%>
-     
+    <%@ include file="navigation.html" %>    
     <jsp:include page="validation.jsp" >
             <jsp:param name="userClass" value="a"/>
     </jsp:include>
                 
-    <%
-        
-        displayUploadForm(out);
- 
-    %>
-
-    <%!public void displayUploadForm(JspWriter out) {
-        try {
-            out.println("<form method=post action=user_management.jsp>");
-            out.println("Uploading:<br>");
-            out.println("<input type=submit name=fffSubmit value=Update>");
-            out.println("</form>");
-        } catch (IOException ex) {
-            //TODO Log error
-        }
-    }%>
-    
-    
-
+  <form NAME="form" action="UploadImage" ENCTYPE="multipart/form-data"   method="post" >
+     <TABLE>
+         <tr>
+              <th>Upload File</th>
+                  <td>
+                   <input name="fileUploadAttr" id="filePath"  type="file" value="">
+                 </td>
+                  <td > 
+                 <Input type="submit" value ="UploadFile"/>
+                  </td>
+          </tr>
+    </TABLE>
+ </form>
 </BODY>
 </HTML>
-
