@@ -8,5 +8,6 @@
 </head>
 <body>
 <%@ include file="navigation.html" %>
+<%@ include file="RadiologyInformationSystem.html" %>
 </body>
 </html>
