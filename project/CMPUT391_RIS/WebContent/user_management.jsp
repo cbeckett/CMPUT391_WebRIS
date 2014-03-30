@@ -20,7 +20,11 @@
     </jsp:include>
                 
     <%
-        
+	  //Check validation
+	  String validated = (String) request.getAttribute("validated");
+	  if(validated.equalsIgnoreCase("FALSE"))
+	      response.sendRedirect("access_denied.jsp");    
+    
         displayManagementForm(out);
     
         if (request.getParameter("fffSubmit") != null) {
