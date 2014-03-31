@@ -37,12 +37,3 @@ VALUES
 	('7', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"),
 	('8', '33333', '44444', '66666', 'fakeTest1', "2003-07-04", "2002-08-06", "diagnosis66666aaaaaaaaaaaaaaaa", "description66666ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
 			
-	
-INSERT INTO pacs_images
-VALUES
-	('1', '1', NULL, NULL, NULL),
-	('1', '2', NULL, NULL, NULL),
-	('2', '3', NULL, NULL, NULL),
-	('3', '4', NULL, NULL, NULL),
-	('4', '5', NULL, NULL, NULL),
-	('4', '6', NULL, NULL, NULL);

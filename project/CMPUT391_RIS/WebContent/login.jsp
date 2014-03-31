@@ -52,7 +52,7 @@
 					response.addCookie(cookie);
 					//Redirect to welcome
 					out.println("<p><b>Success!</b></p>");
-					response.sendRedirect("reporting.jsp");
+					response.sendRedirect("search.jsp");
 
 				} else {
 					displayLoginForm(out);
