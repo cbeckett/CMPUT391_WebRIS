@@ -16,16 +16,26 @@
             response.sendRedirect("access_denied.jsp");
             %>
   <form NAME="form" action="UploadImage" ENCTYPE="multipart/form-data" method="post" >
-     <TABLE>
-         <tr>
-              <th>File to upload: </th>
+     <TABLE>       
+                  <tr>
+                  <td>File to upload: </td>
+                  </tr>
+                  <tr>
                   <td>
                    <input name="fileUploadAttr" id="filePath"  type="file" value="">
+                   </td>
+                 </tr>
+                 <tr>
+                 <td>
+                 Record ID: <input type=number name=RECORDID>
+                 Image ID: <input type=number name=IMAGEID>
                  </td>
-                  <td > 
+                 </tr>
+                  <tr > 
+                  <td>
                  <Input type="submit" value ="UploadFile"/>
-                  </td>
-          </tr>
+                 </td>
+                  </tr>
     </TABLE>
  </form>
 </BODY>

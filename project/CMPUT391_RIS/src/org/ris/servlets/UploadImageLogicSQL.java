@@ -60,18 +60,31 @@ public class UploadImageLogicSQL extends HttpServlet {
 	try {
 	    //Parse the HTTP request to get the image stream
 	    DiskFileUpload fu = new DiskFileUpload();
-	    List FileItems = fu.parseRequest(request);
+	    List<FileItem> FileItems = fu.parseRequest(request);
+	    long size = 0;
+	    FileItem imagePath = null;
+	    String recordId="", imageId="";
 	    String radioid = request.getParameter("RadioID");
-	    // Process the uploaded items, assuming only 1 image file uploaded
-	    Iterator i = FileItems.iterator();
-	    FileItem item = (FileItem) i.next();
-	    while (i.hasNext() && item.isFormField()) {
-		    item = (FileItem) i.next();
-	    }
-	    long size = item.getSize();
+	    // Process form items
+	    for(FileItem item:FileItems) {
+            String fieldName = item.getFieldName();
+	        if(item.isFormField()) { 
 
+	            if(fieldName.equalsIgnoreCase("RECORDID"))
+	            	recordId = item.getString();
+	            else if(fieldName.equalsIgnoreCase("IMAGEID"))
+	            	imageId = item.getString();
+	        } else { // file fields
+	            if(fieldName.equalsIgnoreCase("fileUploadAttr"))
+	            {
+	            	imagePath = item;
+	            	size = item.getSize();
+	            }
+	        }
+	    }
+	    
 	    //Get the image stream
-	    InputStream instream = item.getInputStream();
+	    InputStream instream = imagePath.getInputStream();
 	    BufferedImage image = ImageIO.read(instream);
 	    BufferedImage fullsize = shrink(image, 1);
 	    BufferedImage mediumsize=shrink(image, 2);
@@ -89,7 +102,7 @@ public class UploadImageLogicSQL extends HttpServlet {
 	    Connection databaseConnection = Database.requestConnection();
 
 	    //Insert an empty blob into the table first. Note that you have to 
-	    PreparedStatement stmt = databaseConnection.prepareStatement("INSERT into pacs_images values(4, 4, ?, ?, ?)");
+	    PreparedStatement stmt = databaseConnection.prepareStatement("INSERT into pacs_images values(" + recordId + ", " + imageId + ", ?, ?, ?)");
 	    stmt.setBinaryStream(1,thumb,(int)size);
 	    stmt.setBinaryStream(2,medium,(int)size);
 	    stmt.setBinaryStream(3,full,(int)size);
