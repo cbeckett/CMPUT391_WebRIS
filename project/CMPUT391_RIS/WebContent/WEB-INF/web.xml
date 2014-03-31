@@ -4,14 +4,28 @@
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-  
-    <servlet>
-        <servlet-name>UploadImageLogicSQL</servlet-name>
-        <servlet-class>org.ris.servlets.UploadImageLogicSQL</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UploadImageLogicSQL</servlet-name>
-        <url-pattern>/UploadImage</url-pattern>
-    </servlet-mapping>
-
+  <servlet>
+    <servlet-name>UploadImageLogicSQL</servlet-name>
+    <servlet-class>org.ris.servlets.UploadImageLogicSQL</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PictureBrowse</servlet-name>
+    <servlet-class>org.ris.servlets.PictureBrowse</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetOnePic</servlet-name>
+    <servlet-class>org.ris.servlets.GetOnePic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadImageLogicSQL</servlet-name>
+    <url-pattern>/UploadImage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PictureBrowse</servlet-name>
+    <url-pattern>/PictureBrowse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetOnePic</servlet-name>
+    <url-pattern>/GetOnePic</url-pattern>
+  </servlet-mapping>
 </web-app>

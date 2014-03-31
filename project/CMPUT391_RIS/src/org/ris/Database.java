@@ -16,7 +16,7 @@ import java.util.Properties;
 public class Database {
 	private static final String DATABASE_NAME = "ris";
 	private static final String DATABASE_USERNAME = "root";
-	private static final String DATABASE_PASSWORD = "password";
+	private static final String DATABASE_PASSWORD = "12345";
 	private static final String DATABASE_URL = "localhost:3306";
 	private static final String DATABASE_DRIVER = "jdbc:mariadb:";
 	/**

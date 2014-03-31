@@ -31,8 +31,10 @@ package org.ris.servlets;
       )
  ***/
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -54,18 +56,12 @@ public class UploadImageLogicSQL extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-
-	String username = "yuan";
-	String password = "*****";
-
-	String drivername = "com.shifang.logicsql.jdbc.driver.LogicSqlDriver";
-	String dbstring ="jdbc.logicsql@luscar:2000:database";
 	
 	try {
 	    //Parse the HTTP request to get the image stream
 	    DiskFileUpload fu = new DiskFileUpload();
 	    List FileItems = fu.parseRequest(request);
-	    
+	    String radioid = request.getParameter("RadioID");
 	    // Process the uploaded items, assuming only 1 image file uploaded
 	    Iterator i = FileItems.iterator();
 	    FileItem item = (FileItem) i.next();
@@ -76,21 +72,33 @@ public class UploadImageLogicSQL extends HttpServlet {
 
 	    //Get the image stream
 	    InputStream instream = item.getInputStream();
-	    
+	    BufferedImage image = ImageIO.read(instream);
+	    BufferedImage fullsize = shrink(image, 1);
+	    BufferedImage mediumsize=shrink(image, 2);
+	    BufferedImage thumbnail=shrink(image, 5);
+	    ByteArrayOutputStream fullpic = new ByteArrayOutputStream();
+	    ByteArrayOutputStream medpic = new ByteArrayOutputStream();
+	    ByteArrayOutputStream smallpic = new ByteArrayOutputStream();
+	    ImageIO.write(thumbnail, "gif", fullpic);
+	    InputStream thumb = new ByteArrayInputStream(fullpic.toByteArray());
+	    ImageIO.write(mediumsize, "gif", medpic);
+	    InputStream medium = new ByteArrayInputStream(medpic.toByteArray());
+	    ImageIO.write(fullsize, "gif", smallpic);
+	    InputStream full = new ByteArrayInputStream(smallpic.toByteArray());
             // Connect to the database
 	    Connection databaseConnection = Database.requestConnection();
 
 	    //Insert an empty blob into the table first. Note that you have to 
-	    PreparedStatement stmt = databaseConnection.prepareStatement("insert into photos values(1, 2, ?, ?, ?)");
-	    stmt.setBinaryStream(1,instream,(int)size);
-	    stmt.setBinaryStream(2,instream,(int)size);
-	    stmt.setBinaryStream(3,instream,(int)size);
+	    PreparedStatement stmt = databaseConnection.prepareStatement("INSERT into pacs_images values(4, 4, ?, ?, ?)");
+	    stmt.setBinaryStream(1,thumb,(int)size);
+	    stmt.setBinaryStream(2,medium,(int)size);
+	    stmt.setBinaryStream(3,full,(int)size);
 
            // execute the insert statement
-            stmt.executeUpdate();
-            stmt.executeUpdate("commit");
-            databaseConnection.close();
-	    response_message = "the file has been uploaded";
+        stmt.executeUpdate();
+        stmt.executeUpdate("commit");
+        databaseConnection.close();
+	    response_message = "the file has been uploaded "+radioid;
 	} catch( Exception ex ) {
 	    response_message = ex.getMessage();
 	}
@@ -108,8 +116,19 @@ public class UploadImageLogicSQL extends HttpServlet {
 		"</H1>\n" +
 		"</BODY></HTML>");
 	}
+    //shrink image by a factor of n, and return the shrinked image
+    public static BufferedImage shrink(BufferedImage image, int n) {
 
-    /*
-    /*   To connect to the specified database
-     */
+        int w = image.getWidth() / n;
+        int h = image.getHeight() / n;
+
+        BufferedImage shrunkImage =
+            new BufferedImage(w, h, image.getType());
+
+        for (int y=0; y < h; ++y)
+            for (int x=0; x < w; ++x)
+                shrunkImage.setRGB(x, y, image.getRGB(x*n, y*n));
+
+        return shrunkImage;
+    }
 }

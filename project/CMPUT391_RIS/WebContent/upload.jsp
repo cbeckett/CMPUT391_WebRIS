@@ -8,12 +8,12 @@
     <%@ include file="navigation.html" %>    
     <jsp:include page="validation.jsp" >
             <jsp:param name="userClass" value="a"/>
-    </jsp:include>
-                
-  <form NAME="form" action="UploadImage" ENCTYPE="multipart/form-data"   method="post" >
+    </jsp:include>  
+       
+  <form NAME="form" action="UploadImage" ENCTYPE="multipart/form-data" method="post" >
      <TABLE>
          <tr>
-              <th>Upload File</th>
+              <th>File to upload: </th>
                   <td>
                    <input name="fileUploadAttr" id="filePath"  type="file" value="">
                  </td>
