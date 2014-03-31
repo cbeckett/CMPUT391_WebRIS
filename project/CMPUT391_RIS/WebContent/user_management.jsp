@@ -98,6 +98,10 @@
 	            		sql = (sql + "users.person_id='"+userClass+"',");
 	            		normcheck=1;
 	                }
+	            	if (registerDate!=""){
+                        sql = (sql + "users.date_registered='"+registerDate+"',");
+                        normcheck=1;
+                    }
 	                if (olddoctorID!="" && newdoctorID!=""){
 	                	sqldoc = ("UPDATE family_doctor SET doctor_id='"+newdoctorID+"' WHERE patient_id='"+personID+"' AND doctor_id='"+olddoctorID+"'");
 	                	doccheck=1;
