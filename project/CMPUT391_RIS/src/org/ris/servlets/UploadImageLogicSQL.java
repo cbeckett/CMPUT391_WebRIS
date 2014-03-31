@@ -111,7 +111,7 @@ public class UploadImageLogicSQL extends HttpServlet {
         stmt.executeUpdate();
         stmt.executeUpdate("commit");
         databaseConnection.close();
-	    response_message = "the file has been uploaded "+radioid;
+	    response_message = "the file has been uploaded ";
 	} catch( Exception ex ) {
 	    response_message = ex.getMessage();
 	}
