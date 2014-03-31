@@ -41,8 +41,10 @@ public class GetOnePic extends HttpServlet
 	if ( picid.startsWith("big") )  
 	    query = 
 	     "select full_size from pacs_images where record_id="+ picid.substring(3);
+	else if ( picid.startsWith("normal") )
+		query = "select regular_size from pacs_images where record_id="+ picid.substring(6);
 	else
-	    query = "select regular_size from pacs_images where record_id="+picid;
+	    query = "select thumbnail from pacs_images where record_id="+picid;
 
 	ServletOutputStream out = response.getOutputStream();
 
@@ -56,16 +58,16 @@ public class GetOnePic extends HttpServlet
 	    ResultSet rset = stmt.executeQuery(query);
 
 	    if ( rset.next() ) {
-		response.setContentType("image/gif");
-		InputStream input = rset.getBinaryStream(1);	    
-		int imageByte;
-		while((imageByte = input.read()) != -1) {
-		    out.write(imageByte);
-		}
-		input.close();
+			response.setContentType("image/gif");
+			InputStream input = rset.getBinaryStream(1);	    
+			int imageByte;
+				while((imageByte = input.read()) != -1) {
+				    out.write(imageByte);
+				}
+			input.close();
 	    } 
 	    else 
-		out.println("no picture available");
+		out.println("No picture available");
 	} catch( Exception ex ) {
 	    out.println(ex.getMessage() );
 	}
