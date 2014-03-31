@@ -45,16 +45,43 @@ public class PictureBrowse extends HttpServlet implements SingleThreadModel {
 	String SORT = request.getParameter("SORT");
 	if (SORT==null)
 		SORT="RANK";
-	
 	if(SSTARTDATE.isEmpty())
 		SSTARTDATE = "0001-01-01";
 	if(SENDDATE.isEmpty())
 		SENDDATE = "9999-12-31";
+	
+	String userclass="";
+	String userId="";
+	
+	Cookie[] cookies = request.getCookies();
+	Cookie classCookie = null;
+	Cookie userCookie = null;
+	//Get the user class cookie, check permissions         
+	for(int i = 0; i < cookies.length; i++)
+		{
+		    if(cookies[i].getName().equalsIgnoreCase("class"))
+		        classCookie = cookies[i];
+		    else if (cookies[i].getName().equalsIgnoreCase("personId")){
+		    	userCookie = cookies[i];
+		    }
+		}
+		userclass=classCookie.getValue();
+		userId=userCookie.getValue();
 	//, patient_id, doctor_id, radiologist_id, test_type, prescribing_date, test_date, diagnosis, description 
 	String querydata ="SELECT record_id, patient_id, doctor_id, radiologist_id, test_type, prescribing_date, test_date, diagnosis, description FROM radiology_record WHERE ";
-	if (sname!=""){
-		querydata = (querydata + "patient_id LIKE '"+sname+"' AND ");
-    }
+	
+	if (userclass.equals("p")){
+		querydata = (querydata + "patient_id='"+userId+"' AND ");
+	}
+	else if (userclass.equals("d")){
+		querydata = (querydata + "doctor_id='"+userId+"' AND ");
+	}
+	else if (userclass.equals("r")){
+		querydata = (querydata + "radiologist_id='"+userId+"' AND ");
+	}
+	//if (sname!="" || userclass.equals("p")){
+	//	querydata = (querydata + "patient_id LIKE '"+sname+"' AND ");
+    //}
 	if (sdiagnosis!=""){
 		querydata = (querydata + "diagnosis LIKE '"+sdiagnosis+"' AND ");
     }

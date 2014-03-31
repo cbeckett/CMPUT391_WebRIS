@@ -19,7 +19,7 @@
 			//Get the user input from the login page
 			String userName = (request.getParameter("USERID")).trim();
 			String passwd = (request.getParameter("PASSWD")).trim();
-
+		    String personId = "";
 			//Establish the connection to db
 			Connection databaseConnection = Database.requestConnection();
 
@@ -27,7 +27,7 @@
 				//Query for user info
 				Statement stmt = null;
 				ResultSet rset = null;
-				String sql = "SELECT password, class FROM users WHERE user_name = '"
+				String sql = "SELECT password, class, person_id FROM users WHERE user_name = '"
 						+ userName + "'";
 				try {
 					stmt = databaseConnection.createStatement();
@@ -43,6 +43,7 @@
 				{
 					truepwd = (rset.getString("password")).trim();
 					userClass = (rset.getString("class")).trim();
+					personId = (rset.getString("person_id")).trim();
 				}
 				
 				//Display the result
@@ -50,7 +51,8 @@
 					//Store cookie on user's machine
 					Cookie cookie = new Cookie("class", userClass);
 					response.addCookie(cookie);
-					cookie = new Cookie("userId", userName);
+					cookie = new Cookie("personId", personId);
+					response.addCookie(cookie);
 					//Redirect to welcome
 					out.println("<p><b>Success!</b></p>");
 					response.sendRedirect("search.jsp");

@@ -22,8 +22,8 @@
     <%
 	  //Check validation
 	  String validated = (String) request.getAttribute("validated");
-	  if(validated.equalsIgnoreCase("FALSE"))
-	      response.sendRedirect("access_denied.jsp");    
+	  //if(validated.equalsIgnoreCase("FALSE"))
+	      //response.sendRedirect("access_denied.jsp");    
     
         displayManagementForm(out);
     

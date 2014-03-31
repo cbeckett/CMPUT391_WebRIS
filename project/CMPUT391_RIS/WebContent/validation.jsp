@@ -23,13 +23,14 @@
 	    //Re-direct early if no cookie exists
 	    if(cookies == null)
 	        response.sendRedirect("access_denied.jsp");
-	    //Get the user class cookie, check permissions         
-	    for(int i = 0; i < cookies.length; i++)
+	    //Get the user class cookie, check permissions  
+	    for(Cookie c : cookies)
 	    {
-	        if(cookies[i].getName().equalsIgnoreCase("class"));
-	            classCookie = cookies[i];
+	    	out.println(c.getName() + "-" + c.getValue());
+	        if(c.getName().equalsIgnoreCase("class"));
+	            classCookie = c;
 	    }
-	    
+	    out.println(classCookie.getName() + "-" + classCookie.getValue());
 	    if((classCookie != null) && classCookie.getValue().equalsIgnoreCase(userClass))
 	        {
 	    	request.setAttribute("validated", "TRUE");

@@ -14,7 +14,7 @@
      <TABLE>
          <tr>
                   <td > 
-                 Search by Name
+                 Search by Patient ID
                  <input type=text name=sName maxlength=128><br>
                  Search by Diagnosis
                  <input type=text name=sDiagnosis maxlength=128><br>
