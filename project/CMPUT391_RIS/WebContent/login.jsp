@@ -50,6 +50,7 @@
 					//Store cookie on user's machine
 					Cookie cookie = new Cookie("class", userClass);
 					response.addCookie(cookie);
+					cookie = new Cookie("userId", userName);
 					//Redirect to welcome
 					out.println("<p><b>Success!</b></p>");
 					response.sendRedirect("search.jsp");
