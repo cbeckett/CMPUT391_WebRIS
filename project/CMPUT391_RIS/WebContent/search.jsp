@@ -13,7 +13,6 @@
   <form NAME="form" action="PictureBrowse" method="get" >
      <TABLE>
          <tr>
-              <th>Search File</th><br>
                   <td > 
                  Search by Name
                  <input type=text name=sName maxlength=128><br>
@@ -28,11 +27,11 @@
                  <input type=date name=SENDDATE><br>
                  Sort by<br>
                  Date Ascending
-                 <input type=radio name="ASC" value=ASC><br>
+                 <input type=radio name="SORT" value=ASC>
                  Date Descending
-           		 <input type=radio name="DESC" value=DESC><br>
+           		 <input type=radio name="SORT" value=DESC>
            		 Rank
-           		 <input type=radio name="RANK" value=RANK><br>
+           		 <input type=radio name="SORT" value=RANK><br>
                  <Input type="submit" value ="Search"/>
                   </td>
           </tr>

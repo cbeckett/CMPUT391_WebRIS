@@ -42,8 +42,9 @@ public class PictureBrowse extends HttpServlet implements SingleThreadModel {
 	String sdescription = request.getParameter("sDescription");
 	String SSTARTDATE = request.getParameter("SSTARTDATE");
 	String SENDDATE = request.getParameter("SENDDATE");
-	String ASC = request.getParameter("ASC");
-	String DESC = request.getParameter("DESC");
+	String SORT = request.getParameter("SORT");
+	if (SORT==null)
+		SORT="RANK";
 	
 	if(SSTARTDATE.isEmpty())
 		SSTARTDATE = "0001-01-01";
@@ -61,11 +62,14 @@ public class PictureBrowse extends HttpServlet implements SingleThreadModel {
 		querydata = (querydata + "description LIKE '"+sdescription+"' AND ");
     }
 	querydata = (querydata + "test_date BETWEEN '"+SSTARTDATE+"' AND '"+SENDDATE+"'");
-	if (ASC!=null){
+	if (SORT.equals("ASC")){
 		querydata = (querydata + " ORDER BY test_date ASC");
 	}
-	if (DESC!=null){
+	else if (SORT.equals("DESC")){
 		querydata = (querydata + " ORDER BY test_date DESC");
+	}
+	else{
+		querydata = (querydata + " ORDER BY (select 6*count(t.patient_id) from radiology_record t where t.patient_id=radiology_record.patient_id) + (select 3*count(d.diagnosis) from radiology_record d where d.diagnosis=radiology_record.diagnosis) + (select count(de.description) from radiology_record de where de.description=radiology_record.description) DESC");
 	}
 	out.println("<html>");
 	out.println("<head>");
