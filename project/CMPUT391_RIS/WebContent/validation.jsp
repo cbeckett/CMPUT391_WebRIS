@@ -26,11 +26,10 @@
 	    //Get the user class cookie, check permissions  
 	    for(Cookie c : cookies)
 	    {
-	    	out.println(c.getName() + "-" + c.getValue());
-	        if(c.getName().equalsIgnoreCase("class"));
+	        if(c.getName().equalsIgnoreCase("class"))
 	            classCookie = c;
 	    }
-	    out.println(classCookie.getName() + "-" + classCookie.getValue());
+
 	    if((classCookie != null) && classCookie.getValue().equalsIgnoreCase(userClass))
 	        {
 	    	request.setAttribute("validated", "TRUE");
