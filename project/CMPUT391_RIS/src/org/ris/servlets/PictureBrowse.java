@@ -68,7 +68,7 @@ public class PictureBrowse extends HttpServlet implements SingleThreadModel {
 	    conn.close();
 	} catch ( Exception ex ){ out.println( ex.toString() );}
     
-	out.println("<P><a href=\"/yuan/servlets/logicsql.html\"> Return </a>");
+	out.println("<P><a href=\"/CMPUT391_RIS/search.jsp\"> Return </a>");
 	out.println("</body>");
 	out.println("</html>");
     }
